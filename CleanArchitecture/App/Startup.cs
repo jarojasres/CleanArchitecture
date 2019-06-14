@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using App.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CleanArchitecture.Infrastructure.Data.Context;
 
 namespace App
 {
@@ -42,7 +43,13 @@ namespace App
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<UniversityDBContext>(options =>
+            {
+            options.UseSqlServer(Configuration.GetConnectionString("UniversityDBConnection"));
+
+            });
+
+        services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
