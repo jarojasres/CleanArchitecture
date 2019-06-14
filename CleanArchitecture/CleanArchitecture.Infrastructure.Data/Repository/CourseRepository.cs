@@ -16,7 +16,7 @@ namespace CleanArchitecture.Infrastructure.Data.Repository
             _ctx = ctx;
         }
 
-        IEnumerable<Course> GetCourses()
+        public IEnumerable<Course> GetCourses()
         {
             return _ctx.Courses;
         }
